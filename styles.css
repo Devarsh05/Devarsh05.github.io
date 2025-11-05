@@ -940,7 +940,7 @@ body {
 }
 
 /* ===============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - UPDATED
    =============================================== */
 @media (max-width: 980px) {
   .hero-grid { 
@@ -949,7 +949,18 @@ body {
   }
   
   .hero-visual {
-    order: -1;
+    display: flex;
+    justify-content: center;
+    order: 2;  /* Move GIF below text on mobile */
+  }
+  
+  .hero-text {
+    order: 1;  /* Text comes first */
+  }
+  
+  .hero-svg,
+  .hero-gif {
+    max-width: 300px;  /* Smaller on tablets */
   }
   
   .hero h1 {
@@ -993,6 +1004,7 @@ body {
   
   .hero { 
     padding-top: 100px;
+    min-height: auto;  /* Remove fixed height on mobile */
   }
   
   .hero h1 { 
@@ -1003,12 +1015,26 @@ body {
     font-size: 1rem;
   }
   
+  .hero-svg,
+  .hero-gif {
+    max-width: 280px;  /* Even smaller on mobile */
+    margin: 0 auto;  /* Center the GIF */
+  }
+  
   .cards.three { 
     grid-template-columns: 1fr;
   }
   
   .about-cards { 
     grid-template-columns: 1fr 1fr;
+  }
+  
+  .mini-card {
+    padding: 20px 12px;
+  }
+  
+  .mini-card span {
+    font-size: 1.5rem;
   }
   
   .nav-toggle { 
@@ -1039,13 +1065,27 @@ body {
     padding: 8px 0;
   }
   
+  .nav-list a::after {
+    display: none;  /* Remove underline effect on mobile */
+  }
+  
   .hero-ctas {
     flex-direction: column;
+    align-items: stretch;
   }
   
   .hero-ctas .btn {
     width: 100%;
     justify-content: center;
+  }
+  
+  .tech-list {
+    justify-content: center;
+  }
+  
+  .tech-list li {
+    font-size: 0.85rem;
+    padding: 6px 12px;
   }
   
   .contact-actions {
@@ -1063,8 +1103,82 @@ body {
   .project-links .btn {
     width: 100%;
   }
+  
+  .cta {
+    padding: 40px 20px;
+  }
+  
+  .cta h2 {
+    font-size: 1.75rem;
+  }
+  
+  .cta p {
+    font-size: 1rem;
+  }
+  
+  /* Fix project images on mobile */
+  .project-img {
+    height: 180px;
+  }
+  
+  /* Better spacing for education section */
+  .education-inline {
+    margin-top: 24px;
+    padding-top: 24px;
+  }
+  
+  .education-inline h3 {
+    font-size: 1.25rem;
+  }
+  
+  /* Header adjustments */
+  .header-inner {
+    height: 64px;
+  }
+  
+  .brand .avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+  
+  .brand .brand-text strong {
+    font-size: 0.95rem;
+  }
+  
+  .btn-resume {
+    display: none;  /* Hide resume button on very small screens */
+  }
 }
 
+/* Extra small devices */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .hero h1 {
+    font-size: 1.85rem;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-svg,
+  .hero-gif {
+    max-width: 240px;
+  }
+  
+  .card {
+    padding: 24px;
+  }
+  
+  .about-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
 /* ===============================================
    UTILITY CLASSES
    =============================================== */
