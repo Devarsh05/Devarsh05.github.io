@@ -26,7 +26,7 @@ button { font: inherit; color: inherit; }
   margin-inline: auto;
   padding-inline: var(--space-24);
 }
-.section { padding-block: var(--space-64); }
+.section { padding-block: calc(var(--section-gap) / 2); }
 
 /* Accessibility */
 .skip-link {
@@ -234,3 +234,145 @@ button { font: inherit; color: inherit; }
 }
 /* Illustration floats uncontained — no clip, no frame, no radius */
 .hero-art svg { width: 100%; height: auto; }
+
+/* -------------------------------------------------------- capabilities */
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-14);
+  margin-top: var(--space-32);
+}
+.cap-card {
+  background: var(--color-chartreuse);
+  border-radius: var(--radius-card);
+  padding: var(--card-padding);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+.cap-card h3 {
+  font-size: var(--text-subheading);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-subheading);
+  line-height: var(--leading-subheading);
+  padding-right: var(--space-32);
+}
+/* Body sits in forest ink, not sage dust — sage on chartreuse is untested */
+.cap-card p { color: var(--color-forest-ink); }
+.cap-icon {
+  position: absolute;
+  top: var(--card-padding);
+  right: var(--card-padding);
+}
+
+/* ---------------------------------------------------------------- work */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-32);
+  margin-top: var(--space-32);
+}
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+/* Ratio lock: both cards render identically, so a real screenshot can
+   replace the placeholder at the same path with no markup change. */
+.project-shot {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  background: var(--color-mist-paper);
+  margin-bottom: var(--space-12);
+}
+.project h3 {
+  font-size: var(--text-body-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-body-lg);
+}
+.project-desc { color: var(--color-sage-dust); max-width: var(--measure); }
+.project ul { display: flex; flex-direction: column; gap: var(--space-8); }
+.project li {
+  color: var(--color-sage-dust);
+  padding-left: var(--space-14);
+  position: relative;
+  max-width: var(--measure);
+}
+.project li::before { content: "\2013"; position: absolute; left: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-7); }
+.project-links {
+  display: flex;
+  gap: var(--space-24);
+  margin-top: auto;
+  padding-top: var(--space-12);
+}
+.project-links a { font-weight: var(--weight-semibold); }
+.project-links a:hover { color: var(--color-pine-shadow); }
+
+/* Two items, two equal columns — never a 3-col grid with an empty slot */
+.also { margin-top: var(--space-56); }
+.also-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-32);
+  margin-top: var(--space-14);
+}
+.also-grid h3 {
+  font-size: var(--text-body-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-body-lg);
+}
+.also-grid p {
+  color: var(--color-sage-dust);
+  max-width: var(--measure);
+  margin-block: var(--space-7);
+}
+.also-grid .project-links { margin-top: var(--space-8); padding-top: 0; }
+
+/* ---------------------------------------------------- experience/about */
+.exp-row { margin-top: var(--space-32); display: flex; flex-direction: column; gap: var(--space-14); }
+.exp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-24);
+  flex-wrap: wrap;
+}
+.exp-head h3 {
+  font-size: var(--text-subheading);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-subheading);
+}
+.exp-role { font-weight: var(--weight-regular); color: var(--color-pine-shadow); }
+.exp-date { color: var(--color-sage-dust); }
+.exp-row ul { display: flex; flex-direction: column; gap: var(--space-8); max-width: 720px; }
+.exp-row li { color: var(--color-sage-dust); padding-left: var(--space-14); position: relative; }
+.exp-row li::before { content: "\2013"; position: absolute; left: 0; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-64);
+  margin-top: var(--space-32);
+}
+.about-grid .prose + .prose { margin-top: var(--space-14); }
+.about-facts { display: flex; flex-direction: column; gap: var(--space-24); }
+.fact h3 {
+  font-size: var(--text-body-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-body-lg);
+  margin-bottom: var(--space-7);
+}
+.fact p { max-width: var(--measure); }
+.muted { color: var(--color-sage-dust); }
+
+/* Experience layout A/B — one variant is deleted once chosen */
+body:not(.exp-folded) .exp-in-about { display: none; }
+body.exp-folded #experience { display: none; }
+
+/* ------------------------------------------------------------- contact */
+.contact { display: flex; flex-direction: column; gap: var(--space-14); margin-top: var(--space-24); }
+.contact-actions { display: flex; align-items: center; gap: var(--space-24); margin-top: var(--space-14); flex-wrap: wrap; }
