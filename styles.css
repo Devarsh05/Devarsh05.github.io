@@ -333,24 +333,35 @@ button { font: inherit; color: inherit; }
 .also-grid .project-links { margin-top: var(--space-8); padding-top: 0; }
 
 /* ---------------------------------------------------- experience/about */
-.exp-row { margin-top: var(--space-32); display: flex; flex-direction: column; gap: var(--space-14); }
-.exp-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--space-24);
-  flex-wrap: wrap;
+/* Meta rail left, bullets right — no cards, pure type and whitespace */
+.exp-row {
+  margin-top: var(--space-32);
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  gap: var(--space-56);
+  align-items: start;
 }
-.exp-head h3 {
+.exp-meta h3 {
   font-size: var(--text-subheading);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-subheading);
+  line-height: var(--leading-subheading);
 }
-.exp-role { font-weight: var(--weight-regular); color: var(--color-pine-shadow); }
-.exp-date { color: var(--color-sage-dust); }
-.exp-row ul { display: flex; flex-direction: column; gap: var(--space-8); max-width: 720px; }
-.exp-row li { color: var(--color-sage-dust); padding-left: var(--space-14); position: relative; }
-.exp-row li::before { content: "\2013"; position: absolute; left: 0; }
+.exp-role { color: var(--color-pine-shadow); margin-top: var(--space-7); }
+.exp-date { color: var(--color-sage-dust); margin-top: var(--space-7); }
+/* 2x2 so the bullets fill the column without any line passing the measure */
+.exp-points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24) var(--space-32);
+}
+.exp-points li {
+  color: var(--color-sage-dust);
+  padding-left: var(--space-14);
+  position: relative;
+  max-width: var(--measure);
+}
+.exp-points li::before { content: "\2013"; position: absolute; left: 0; }
 
 .about-grid {
   display: grid;
@@ -369,10 +380,52 @@ button { font: inherit; color: inherit; }
 .fact p { max-width: var(--measure); }
 .muted { color: var(--color-sage-dust); }
 
-/* Experience layout A/B — one variant is deleted once chosen */
-body:not(.exp-folded) .exp-in-about { display: none; }
-body.exp-folded #experience { display: none; }
-
 /* ------------------------------------------------------------- contact */
 .contact { display: flex; flex-direction: column; gap: var(--space-14); margin-top: var(--space-24); }
 .contact-actions { display: flex; align-items: center; gap: var(--space-24); margin-top: var(--space-14); flex-wrap: wrap; }
+
+/* ---------------------------------------------------------- responsive */
+@media (max-width: 1024px) {
+  :root {
+    --text-display: 43px;
+    --tracking-display: -0.051em;
+    --leading-display: 0.9;
+    --section-gap: 64px;
+  }
+  .hero-grid { grid-template-columns: 1fr; gap: var(--space-32); }
+  .hero-art { max-width: 320px; }
+  .cap-grid,
+  .work-grid,
+  .about-grid { grid-template-columns: 1fr; }
+  .about-grid { gap: var(--space-32); }
+  .exp-row { grid-template-columns: 1fr; gap: var(--space-24); }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --text-display: 36px;
+    --tracking-display: -0.039em;
+    --leading-display: 1;
+    --text-heading: 36px;
+    --tracking-heading: -0.039em;
+    --leading-heading: 1;
+    --section-gap: 56px;
+  }
+  .head-inner { flex-wrap: wrap; }
+  .wordmark { order: 1; }
+  .nav-toggle { display: flex; order: 2; }
+  .site-head nav { order: 3; width: 100%; }
+  .nav-menu { display: none; }
+  .nav-menu.open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-12);
+    padding-top: var(--space-24);
+  }
+  .hero-art { max-width: 240px; }
+  .exp-points,
+  .also-grid { grid-template-columns: 1fr; }
+  .work-grid { gap: var(--space-56); }
+  .foot-inner { flex-direction: column; align-items: flex-start; gap: var(--space-14); }
+}
