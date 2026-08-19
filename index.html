@@ -36,7 +36,7 @@
   <section class="hero section" id="top">
     <div class="wrap hero-grid">
       <div class="hero-art" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 380" class="moth" role="img" aria-hidden="true" fill="none" stroke="#003329" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 32 400 288" class="moth" role="img" aria-hidden="true" fill="none" stroke="#003329" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <g class="moth-wings">
           <g>
             <path d="M 240 133 C 286 105 352 93 406 106 C 416 108 418 119 412 130 C 399 161 379 193 353 213 C 331 230 301 233 273 223 C 255 217 244 203 243 185 Z"/>
@@ -110,32 +110,38 @@
       <div class="cap-grid">
 
         <article class="cap-card">
-          <svg class="cap-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <div class="cap-head">
+            <h3>Multi-Agent Systems</h3>
+            <svg class="cap-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="4.2" r="2.2"/><circle cx="4.6" cy="18" r="2.2"/><circle cx="19.4" cy="18" r="2.2"/>
             <path d="M10.7 6.1 6.1 16M13.3 6.1 17.9 16M6.8 18h10.4"/>
           </svg>
-          <h3>Multi-Agent Systems</h3>
+          </div>
           <p>LangGraph and LangChain orchestration across specialized agents for call analysis, proposal generation, and task routing &mdash; over GPT, Claude, Gemini, and LLaMA.</p>
         </article>
 
         <article class="cap-card">
-          <svg class="cap-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <div class="cap-head">
+            <h3>RAG &amp; Retrieval</h3>
+            <svg class="cap-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M13.2 2.8H6.6A1.6 1.6 0 0 0 5 4.4v15.2a1.6 1.6 0 0 0 1.6 1.6h10.8a1.6 1.6 0 0 0 1.6-1.6V8.6z"/>
             <path d="M13.2 2.8v5.8H19"/>
             <circle cx="11" cy="14" r="2.9"/>
             <path d="m13.1 16.1 2.4 2.4"/>
           </svg>
-          <h3>RAG &amp; Retrieval</h3>
+          </div>
           <p>Tree-sitter AST chunking into ChromaDB for cited, hallucination-resistant Q&amp;A over codebases of up to 10,000 files.</p>
         </article>
 
         <article class="cap-card">
-          <svg class="cap-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <div class="cap-head">
+            <h3>Backend &amp; Deployment</h3>
+            <svg class="cap-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="3.2" y="4" width="17.6" height="6.2" rx="1.4"/>
             <rect x="3.2" y="13.8" width="17.6" height="6.2" rx="1.4"/>
             <path d="M6.9 7.1h.01M6.9 16.9h.01"/>
           </svg>
-          <h3>Backend &amp; Deployment</h3>
+          </div>
           <p>A 5-service backend on Railway with async SQLAlchemy and Celery, atomic Redis rate limiting, and 230+ automated tests behind it.</p>
         </article>
 
@@ -192,7 +198,7 @@
       <div class="also">
         <p class="eyebrow">Also built</p>
         <div class="also-grid">
-          <article>
+          <article class="also-item">
             <h3>AI Stock Insights</h3>
             <p>ML-powered stock analysis with technical indicators and ensemble prediction models, served through a Streamlit dashboard.</p>
             <div class="project-links">
@@ -200,7 +206,7 @@
               <a href="https://github.com/Devarsh05/AI-Stock-Insights" target="_blank" rel="noopener">GitHub</a>
             </div>
           </article>
-          <article>
+          <article class="also-item">
             <h3>RateFlix</h3>
             <p>A movie-review platform with authentication, watchlists, and TMDB integration, built in Java Swing over MySQL.</p>
             <div class="project-links">
@@ -262,14 +268,12 @@
   <section class="section" id="contact">
     <div class="wrap">
       <p class="eyebrow">Contact</p>
-      <div class="contact">
-        <h2 class="h-section">Get in touch<span class="accent">&mdash; let&rsquo;s build something.</span></h2>
-        <p class="lead">The fastest way to reach me is email. I&rsquo;m also on LinkedIn and GitHub.</p>
-        <div class="contact-actions">
-          <a class="btn btn-cta" href="mailto:devarsh.sp13@gmail.com">Email me</a>
-          <a class="btn btn-ghost" href="https://linkedin.com/in/devarsh" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn btn-ghost" href="https://github.com/devarsh05" target="_blank" rel="noopener">GitHub</a>
-        </div>
+      <h2 class="h-section">Get in touch<span class="accent">&mdash; let&rsquo;s build something.</span></h2>
+      <p class="lead">The fastest way to reach me is email. I&rsquo;m also on LinkedIn and GitHub.</p>
+      <div class="contact-actions">
+        <a class="btn btn-cta" href="mailto:devarsh.sp13@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/devarsh" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/devarsh05" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </section>

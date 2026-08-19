@@ -138,11 +138,14 @@ button { font: inherit; color: inherit; }
 }
 .chip {
   font-size: var(--text-caption);
-  letter-spacing: var(--tracking-caption);
-  padding: var(--space-4) var(--space-12);
+  font-weight: var(--weight-regular);
+  letter-spacing: .2px;
+  line-height: 1.4;
+  padding: 5px var(--space-14);
   border-radius: var(--radius-badge);
   border: 1px solid var(--color-mist-paper);
-  color: var(--color-pine-shadow);
+  color: var(--color-sage-dust);
+  white-space: nowrap;
 }
 
 /* Header — deliberately NOT sticky and NOT shadowed */
@@ -221,16 +224,13 @@ button { font: inherit; color: inherit; }
   gap: var(--space-64);
   align-items: center;
 }
-.hero-copy {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-14);
-}
+.hero-copy { display: flex; flex-direction: column; }
+.hero-copy > * + * { margin-top: var(--space-14); }
 .hero-actions {
   display: flex;
   align-items: center;
   gap: var(--space-24);
-  margin-top: var(--space-14);
+  margin-top: var(--space-24);
 }
 /* Illustration floats uncontained — no clip, no frame, no radius */
 .hero-art svg { width: 100%; height: auto; }
@@ -240,44 +240,50 @@ button { font: inherit; color: inherit; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-14);
-  margin-top: var(--space-32);
 }
 .cap-card {
   background: var(--color-chartreuse);
   border-radius: var(--radius-card);
   padding: var(--card-padding);
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-12);
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  transition: outline-color .15s ease;
+}
+.cap-card:hover { outline-color: var(--color-vivid-lime); }
+.cap-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-14);
 }
 .cap-card h3 {
   font-size: var(--text-subheading);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-subheading);
   line-height: var(--leading-subheading);
-  padding-right: var(--space-32);
 }
 /* Body sits in forest ink, not sage dust — sage on chartreuse is untested */
 .cap-card p { color: var(--color-forest-ink); }
-.cap-icon {
-  position: absolute;
-  top: var(--card-padding);
-  right: var(--card-padding);
-}
+/* Optical nudge so the 20px icon sits on the title cap height, not its box top */
+.cap-icon { flex: none; margin-top: 3px; }
 
 /* ---------------------------------------------------------------- work */
 .work-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-32);
-  margin-top: var(--space-32);
 }
 .project {
   display: flex;
   flex-direction: column;
   gap: var(--space-12);
+  transition: transform .15s ease;
 }
+.project:hover { transform: translateY(-2px); }
+.project:hover .project-shot { border-color: var(--color-sage-dust); }
 /* Ratio lock: both cards render identically, so a real screenshot can
    replace the placeholder at the same path with no markup change. */
 .project-shot {
@@ -286,7 +292,10 @@ button { font: inherit; color: inherit; }
   object-fit: cover;
   border-radius: var(--radius-card);
   background: var(--color-mist-paper);
+  /* hairline equalises the light plate against the dark screenshot */
+  border: 1px solid var(--color-mist-paper);
   margin-bottom: var(--space-12);
+  transition: border-color .15s ease;
 }
 .project h3 {
   font-size: var(--text-body-lg);
@@ -320,6 +329,14 @@ button { font: inherit; color: inherit; }
   gap: var(--space-32);
   margin-top: var(--space-14);
 }
+.also-item {
+  border-top: 1px solid var(--color-mist-paper);
+  padding-top: var(--space-14);
+  display: flex;
+  flex-direction: column;
+  transition: border-color .15s ease;
+}
+.also-item:hover { border-top-color: var(--color-sage-dust); }
 .also-grid h3 {
   font-size: var(--text-body-lg);
   font-weight: var(--weight-semibold);
@@ -328,14 +345,13 @@ button { font: inherit; color: inherit; }
 .also-grid p {
   color: var(--color-sage-dust);
   max-width: var(--measure);
-  margin-block: var(--space-7);
+  margin-top: var(--space-7);
 }
-.also-grid .project-links { margin-top: var(--space-8); padding-top: 0; }
+.also-grid .project-links { margin-top: var(--space-14); padding-top: 0; }
 
 /* ---------------------------------------------------- experience/about */
 /* Meta rail left, bullets right — no cards, pure type and whitespace */
 .exp-row {
-  margin-top: var(--space-32);
   display: grid;
   grid-template-columns: minmax(180px, 260px) 1fr;
   gap: var(--space-56);
@@ -367,7 +383,6 @@ button { font: inherit; color: inherit; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-64);
-  margin-top: var(--space-32);
 }
 .about-grid .prose + .prose { margin-top: var(--space-14); }
 .about-facts { display: flex; flex-direction: column; gap: var(--space-24); }
@@ -381,8 +396,64 @@ button { font: inherit; color: inherit; }
 .muted { color: var(--color-sage-dust); }
 
 /* ------------------------------------------------------------- contact */
-.contact { display: flex; flex-direction: column; gap: var(--space-14); margin-top: var(--space-24); }
-.contact-actions { display: flex; align-items: center; gap: var(--space-24); margin-top: var(--space-14); flex-wrap: wrap; }
+.contact-actions { display: flex; align-items: center; gap: var(--space-24); flex-wrap: wrap; }
+
+/* -------------------------------------------------------- section rhythm */
+/* One rule owns the vertical step in every section, so the eyebrow -> headline
+   -> content cadence is byte-identical from Capabilities through Contact. */
+.eyebrow + .h-section,
+.eyebrow + .h-display { margin-top: var(--space-14); }
+
+.h-section + .cap-grid,
+.h-section + .work-grid,
+.h-section + .exp-row,
+.h-section + .about-grid { margin-top: var(--space-32); }
+
+.h-section + .lead { margin-top: var(--space-14); }
+.lead + .contact-actions { margin-top: var(--space-24); }
+
+/* ---------------------------------------------------------- interaction */
+.nav-menu a:not(.btn):hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.btn {
+  transition: background-color .15s ease, color .15s ease,
+              border-color .15s ease, transform .15s ease;
+}
+.btn-cta:active,
+.btn-ghost:active { transform: translateY(1px); }
+.btn-pill:active { transform: translateY(1px); background: var(--color-mist-paper); }
+
+/* Arrow rides the link and nudges forward on hover */
+.project-links a::after {
+  content: "\2192";
+  display: inline-block;
+  margin-left: var(--space-7);
+  transition: transform .15s ease;
+}
+.project-links a:hover::after { transform: translateX(3px); }
+
+.social a { transition: color .15s ease; }
+
+/* --------------------------------------------------------------- motion */
+/* Applied by main.js only when motion is welcome, so a no-JS or
+   reduced-motion visitor never meets an element stuck at opacity 0. */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible { opacity: 1 !important; transform: none !important; }
+  .project:hover { transform: none !important; }
+  .btn:active { transform: none !important; }
+}
 
 /* ---------------------------------------------------------- responsive */
 @media (max-width: 1024px) {

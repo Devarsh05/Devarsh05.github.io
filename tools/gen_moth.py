@@ -201,7 +201,7 @@ def build(graph=False):
             f'\n    {active_node()}'
         )
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" \
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 32 400 288" \
 class="moth" role="img" aria-hidden="true" fill="none" stroke="{INK}" \
 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">{defs}{style}
   <g class="moth-wings">
