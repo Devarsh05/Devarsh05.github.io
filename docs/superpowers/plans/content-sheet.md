@@ -61,8 +61,10 @@ the user's and are excluded.
 
 - Prose `[VOICE]`, approved with one edit ("survive contact with production" →
   "hold up in production").
-- Education `[RESUME + USER]`: **Expected 2027** — the user's correction overrides the
-  resume PDF's "Expected Dec 2026". Two courses remain.
+- Education `[USER]`: **Expected Dec 2026** — this is the live value, matching the
+  resume PDF. It supersedes an earlier instruction to use "Expected 2027"; the user
+  set Dec 2026 directly in `index.html` after the rebuild. The same date appears in
+  the About prose ("finishing in Dec 2026"), so site and PDF now agree.
 - Coursework `[RESUME]`.
 - CS Hub `[RESUME]` — listed **undated** by user instruction; the resume gives no dates.
 
