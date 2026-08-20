@@ -1,51 +1,43 @@
-// Mobile navigation toggle
 const toggle = document.querySelector('.nav-toggle');
 const menu = document.getElementById('nav-menu');
+
 if (toggle && menu) {
   toggle.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
     menu.classList.toggle('open');
   });
 }
 
-// Smooth scroll for internal links
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
-    const targetId = link.getAttribute('href');
-    if (!targetId || targetId === '#') return;
-    const el = document.querySelector(targetId);
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    const id = link.getAttribute('href');
+    if (!id || id === '#') return;
+    const el = document.querySelector(id);
     if (!el) return;
     e.preventDefault();
-    window.scrollTo({ top: el.offsetTop - 64, behavior: 'smooth' });
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     menu?.classList.remove('open');
     toggle?.setAttribute('aria-expanded', 'false');
   });
 });
 
-// Small parallax-ish floating squares (decorative)
-const floating = () => {
-  const root = document.body;
-  for (let i = 0; i < 12; i++) {
-    const s = document.createElement('span');
-    s.className = 'float-square';
-    const size = 8 + Math.random() * 18;
-    s.style.width = `${size}px`;
-    s.style.height = `${size}px`;
-    s.style.background = 'rgba(79,70,229,.15)';
-    s.style.position = 'fixed';
-    s.style.left = Math.random() * 100 + 'vw';
-    s.style.top = Math.random() * 100 + 'vh';
-    s.style.borderRadius = '4px';
-    s.style.zIndex = '0';
-    s.style.filter = 'blur(0.2px)';
-    s.animate([
-      { transform: 'translateY(0px)' },
-      { transform: `translateY(${6 + Math.random() * 12}px)` }
-    ], { duration: 2000 + Math.random() * 3000, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
-    root.appendChild(s);
-  }
-};
-floating();
+// Fade-and-rise as each section enters the viewport. Runs once per section.
+// Opted into only when motion is welcome and IntersectionObserver exists —
+// the .reveal class is never applied otherwise, so content stays visible.
+const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+if (motionOK && 'IntersectionObserver' in window) {
+  const sections = document.querySelectorAll('main > section');
+  sections.forEach((s) => s.classList.add('reveal'));
 
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
+
+  sections.forEach((s) => observer.observe(s));
+}
