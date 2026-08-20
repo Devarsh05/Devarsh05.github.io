@@ -81,7 +81,8 @@ Only these, all stated by the resume: `10+` MCP servers · `eight-node` pipeline
 
 - `assets/contextcode.png` — real capture of the live dependency-graph view at
   1440×900, from `https://context-code.vercel.app/` indexing `encode/databases`.
-- `assets/sixrise.png` — **placeholder**, not a screenshot. Botanical line plate on
-  mist paper, 1440×900. The product is gated behind Shopify merchant auth. Replace
-  this exact path with a real cropped 16:10 screenshot; no markup change is needed.
-  Generator: `tools/sixrise-plate.html`.
+- `assets/sixrise.png` — real capture of the public marketing homepage at
+  `https://www.sixrise.app/` at 1440×900. This replaced the earlier botanical
+  placeholder (recoverable from git history at `tools/sixrise-plate.html`).
+  The app itself has no public URL — the site states it "runs inside the Shopify
+  admin, behind OAuth" — so the homepage is the only real screenshot available.
