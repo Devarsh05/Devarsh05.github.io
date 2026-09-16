@@ -70,9 +70,12 @@ the user's and are excluded.
 
 ## Contact — `[RESUME]`
 
-`devarsh.sp13@gmail.com` · `linkedin.com/in/devarsh` · `github.com/devarsh05`
+`devarsh.sp13@gmail.com` · `linkedin.com/in/devarsh-prajapati-63a451275` · `github.com/devarsh05`
 
-`linkedin.com/in/devarsh` supersedes the old site's `/in/devarsh-prajapati-63a451275`.
+**LinkedIn — corrected 2026-09-16.** The long form
+`/in/devarsh-prajapati-63a451275` is the live, correct profile URL, confirmed
+directly by the user. An earlier note here claimed `/in/devarsh` superseded it;
+that was wrong and is retracted. The long form is what ships on the site.
 
 ## Figures permitted anywhere on the site
 
