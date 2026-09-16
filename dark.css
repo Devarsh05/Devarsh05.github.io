@@ -41,6 +41,7 @@
   /* --- Layout --- */
   --page-max: 1240px;
   --gutter: clamp(20px, 5vw, 56px);
+  --section-pad: clamp(60px, 6vw, 96px);
   --radius-lg: 26px;
   --radius-md: 18px;
   --radius-sm: 10px;
@@ -280,10 +281,16 @@ a { color: inherit; text-decoration: none; }
 
 .hero {
   position: relative;
-  min-height: 100svh;
+  /* Capped: the copy is vertically centred, so on a very tall window the
+     leftover space below the meta row grows and reopens the gap the rest of
+     the rhythm just closed. No effect at or below 960px tall. */
+  min-height: min(100svh, 960px);
   display: flex;
   align-items: center;
-  padding-block: 150px 100px;
+  /* No bottom padding: the next section already owns its own top padding, so
+     adding one here just stacks two gaps and opens a dead zone. The top pad
+     exists only to clear the fixed header. */
+  padding-block: 150px 0;
   isolation: isolate;
   overflow: hidden;
 }
@@ -402,8 +409,8 @@ a { color: inherit; text-decoration: none; }
   flex-wrap: wrap;
   align-items: center;
   gap: 10px 22px;
-  margin: 64px 0 0;
-  padding-top: 26px;
+  margin: 48px 0 0;
+  padding-top: 24px;
   border-top: 1px solid var(--hairline);
   font-size: 12px;
   letter-spacing: 0.09em;
@@ -417,9 +424,15 @@ a { color: inherit; text-decoration: none; }
    Sections
    ============================================================ */
 
-.section { padding-block: clamp(90px, 12vw, 160px); position: relative; }
+/* One rhythm value drives every gap. Each section pads half of it top and
+   bottom, so section-to-section spacing is always 2x this and nothing opens
+   up a dead zone. */
+.section {
+  padding-block: var(--section-pad);
+  position: relative;
+}
 
-.section-head { margin-bottom: clamp(48px, 6vw, 80px); }
+.section-head { margin-bottom: clamp(36px, 4vw, 56px); }
 
 .section-title {
   margin: 0;
@@ -648,6 +661,227 @@ a { color: inherit; text-decoration: none; }
 .also-card .project-desc { margin-top: 16px; font-size: 0.875rem; }
 
 /* ============================================================
+   Capabilities — three glass panels
+   ============================================================ */
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 24px);
+}
+
+.cap-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.4vw, 32px);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-inner);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  transition: transform var(--dur-mid) var(--ease-spring),
+              border-color var(--dur-mid) ease-out,
+              background-color var(--dur-mid) ease-out;
+}
+.cap-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--glass-border-hi);
+  background: var(--glass-bg-hi);
+}
+
+.cap-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+  color: var(--accent);
+  flex: none;
+}
+.cap-icon svg { width: 19px; height: 19px; }
+
+.cap-card h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.cap-card p {
+  margin: 12px 0 0;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+  text-wrap: pretty;
+}
+
+/* ============================================================
+   Experience
+   ============================================================ */
+
+.exp-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
+  gap: clamp(24px, 3vw, 56px);
+  padding: clamp(26px, 2.8vw, 38px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-inner);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+}
+
+.exp-meta h3 {
+  margin: 0;
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.exp-role {
+  margin: 10px 0 0;
+  font-size: 0.9375rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.exp-date {
+  margin: 6px 0 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.exp-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+.exp-points li {
+  position: relative;
+  padding-left: 19px;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+  text-wrap: pretty;
+}
+.exp-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+/* ============================================================
+   About
+   ============================================================ */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 72px);
+  align-items: start;
+}
+
+.about-prose {
+  margin: 0;
+  font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
+  line-height: 1.6;
+  color: var(--text);
+  text-wrap: pretty;
+}
+
+.about-facts {
+  display: grid;
+  gap: 1px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-border);
+  overflow: hidden;
+}
+
+.fact {
+  padding: clamp(18px, 1.8vw, 24px);
+  background: var(--bg);
+}
+.fact h3 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.fact p {
+  margin: 10px 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+.fact p + p { margin-top: 4px; }
+.fact .muted { color: var(--text-dim); font-size: 0.875rem; }
+
+/* ============================================================
+   Contact
+   ============================================================ */
+
+.contact-lead {
+  max-width: 48ch;
+  margin: 24px 0 0;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+.site-foot {
+  border-top: 1px solid var(--hairline);
+  padding-block: 32px;
+}
+.foot-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.foot-inner p {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.foot-social {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================
    Scroll reveals + hover lifts
    Applied by JS only when motion is welcome, so the no-JS and
    reduced-motion paths render fully visible.
@@ -675,6 +909,7 @@ a { color: inherit; text-decoration: none; }
   .reveal { opacity: 1; transform: none; }
   .project-card:hover,
   .also-card:hover,
+  .cap-card:hover,
   .btn:hover,
   .link-chip:hover { transform: none; }
   .project-card:hover .project-shot { transform: none; }
@@ -686,6 +921,9 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 900px) {
   .work-grid { grid-template-columns: minmax(0, 1fr); }
+  .cap-grid { grid-template-columns: minmax(0, 1fr); }
+  .exp-row,
+  .about-grid { grid-template-columns: minmax(0, 1fr); }
   .hero-copy { max-width: 100%; }
   .hero-title { font-size: clamp(2.5rem, 10vw, 5rem); max-width: none; }
   .head-links { display: none; }
@@ -699,7 +937,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 560px) {
   .also { grid-template-columns: minmax(0, 1fr); }
-  .hero { padding-block: 120px 80px; }
+  .hero { padding-block: 120px 0; }
 
   /* The meta line stacks here, so the inline separators would dangle at the
      end of each row. Drop them and let the rows do the separating. */
